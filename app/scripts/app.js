@@ -23,7 +23,7 @@ angular.module('Bling', ['ionic', 'ngCordova', 'ngResource'])
       };
 
       window.plugins.OneSignal.init("ac7e4f3e-570f-4bf3-8d9a-4e9f9b3385f8",
-                                   {googleProjectNumber: "1008005019764"},
+                                   {googleProjectNumber: "313179834389"},
                                    notificationOpenedCallback);
     
       // Show an alert box if a notification comes in when the user is in your app.
@@ -59,7 +59,7 @@ angular.module('Bling', ['ionic', 'ngCordova', 'ngResource'])
 
 
     // redirects to default route for undefined routes
-    $urlRouterProvider.otherwise('/register');
+    $urlRouterProvider.otherwise('/ask');
   });
 
 
