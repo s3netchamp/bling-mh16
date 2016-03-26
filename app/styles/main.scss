@@ -7,3 +7,11 @@
 @import "_variables";
 @import "_fonts";
 
+.center {
+	margin: 0 auto;
+}
+
+.button-caps {
+	text-transform: uppercase;
+	padding: 0 2em;
+}

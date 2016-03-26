@@ -1,7 +1,31 @@
 <ion-view view-title="Register">
   <ion-content>
   	<div class="list">
-  		<div class="item">Get started with Bling!</div>
+  		<div class="item item-borderless">Get started with Bling!</div>
+  		<form ng-submit="sendVerification(model.phone)">
+	  		<label class="item item-input item-borderless">
+		    	+91 -&nbsp;<input type="number" placeholder="10-digit mobile number" ng-model="model.phone">
+		  	</label>
+		  	<div class="row">
+		  		<button class="button button-small button-assertive center button-caps" type="submit" min-length="10" required>
+		  		Send
+		  		</button>
+		  	</div>
+  		</form>
+
+  		<div class="item item-borderless">Enter code to verify</div>
+  		<form ng-submit="verifyCode(model.code)">
+	  		<label class="item item-input item-borderless">
+		    	<input type="number" placeholder="4-digit code" ng-model="model.code">
+		  	</label>
+		  	<div class="row">
+		  		<button class="button button-small button-assertive center button-caps" type="submit" min-length="4" required>
+		  		Verify
+		  		</button>
+		  	</div>
+  		</form>
+
+
   	</div>
   </ion-content>
 </ion-view>

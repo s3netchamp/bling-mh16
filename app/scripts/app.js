@@ -16,6 +16,19 @@ angular.module('Bling', ['ionic', 'ngCordova', 'ngResource'])
 
     $ionicPlatform.ready(function() {
       // save to use plugins here
+
+      //OneSignal Setup
+      var notificationOpenedCallback = function(jsonData) {
+        console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+      };
+
+      window.plugins.OneSignal.init("ac7e4f3e-570f-4bf3-8d9a-4e9f9b3385f8",
+                                   {googleProjectNumber: "1008005019764"},
+                                   notificationOpenedCallback);
+    
+      // Show an alert box if a notification comes in when the user is in your app.
+      window.plugins.OneSignal.enableInAppAlertNotification(true);
+      
     });
 
     // add possible global event handlers here
