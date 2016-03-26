@@ -71,6 +71,21 @@ angular.module('Bling', ['ionic', 'ngCordova', 'ngResource', 'ngStorage'])
         url: '/ask',
         templateUrl: 'templates/ask.html',
         controller: 'AskCtrl'
+      })
+      .state('poll', {
+        url: '/poll',
+        templateUrl: 'templates/poll.html',
+        controller: 'PollCtrl'
+      })
+      .state('pollParticipation', {
+        url: '/pollParticipation',
+        templateUrl: 'templates/poll-participation.html',
+        controller: 'PollParticipationCtrl'
+      })
+      .state('pollStatus', {
+        url: '/pollStatus',
+        templateUrl: 'templates/poll-status.html',
+        controller: 'PollStatusCtrl'
       });
 
 
