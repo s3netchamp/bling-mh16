@@ -7,17 +7,19 @@
  * # ContactsCtrl
  */
 angular.module('Bling')
-  .controller('ContactsCtrl', function($scope, $cordovaContacts, $ionicActionSheet, $state, GetContacts) {
+  .controller('ContactsCtrl', function($scope, $cordovaContacts, $ionicActionSheet, $state, GetContacts, $ionicLoading) {
 
   	console.log('in contacts');
 
     $scope.contacts = [];
-    GetContacts().then(function (contacts) {
+    $ionicLoading.show();
+    GetContacts.get().then(function (contacts) {
       $scope.contacts = contacts;
+      $ionicLoading.hide();
       console.log(contacts);
     });
 
-  
+
 
     $scope.newAction = function (phone) {
 
@@ -54,7 +56,7 @@ angular.module('Bling')
     $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
       viewData.enableBack = true;
     });
-    
+
 
 
 

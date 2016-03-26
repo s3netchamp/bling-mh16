@@ -2,18 +2,21 @@
   <ion-content>
   	<div class="list">
   		<div class="item item-borderless">Get started with Bling!</div>
-  		<form ng-submit="sendVerification(model.phone)">
+  		<form ng-submit="sendVerification(model.phone, model.name)">
 	  		<label class="item item-input item-borderless">
-		    	+91 -&nbsp;<input type="number" placeholder="10-digit mobile number" ng-model="model.phone">
+		    	<input type="text" placeholder="Your name" ng-model="model.name" ng-required>
+		  	</label>
+	  		<label class="item item-input item-borderless">
+		    	+91 -&nbsp;<input type="number" placeholder="10-digit mobile number" ng-model="model.phone" min-length="10" ng-required>
 		  	</label>
 		  	<div class="row">
-		  		<button class="button button-small button-assertive center button-caps" type="submit" min-length="10" required>
+		  		<button class="button button-small button-assertive center button-caps" type="submit">
 		  		Send
 		  		</button>
 		  	</div>
   		</form>
 
-  		<div class="item item-borderless">Enter code to verify</div>
+  		<!-- <div class="item item-borderless">Enter code to verify</div>
   		<form ng-submit="verifyCode(model.code)">
 	  		<label class="item item-input item-borderless">
 		    	<input type="number" placeholder="4-digit code" ng-model="model.code">
@@ -23,7 +26,7 @@
 		  		Verify
 		  		</button>
 		  	</div>
-  		</form>
+  		</form> -->
 
 
   	</div>

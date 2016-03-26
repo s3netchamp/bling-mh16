@@ -14,21 +14,6 @@ angular.module('Bling')
 
   // development
   .constant('API_ENDPOINT', {
-    host: 'http://localhost',
-    port: 3000,
-    path: '',
-    needsAuth: false
+    dev: 'http://192.168.2.100:8100',
+    prod: 'https://api.nexmo.com'
   });
-
-
-  // live example with HTTP Basic Auth
-  /*
-  .constant('API_ENDPOINT', {
-    host: 'http://yourserver.com',
-    path: '/api/v2',
-    needsAuth: true,
-    username: 'whatever',
-    password: 'foobar'
-  });
-  */
-

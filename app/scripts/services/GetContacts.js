@@ -9,50 +9,65 @@
  */
  angular.module('Bling')
   // use factory for services
-  .factory('GetContacts', function($cordovaContacts, $q, FirebaseRef) {
+  .factory('GetContacts', function($q, FirebaseRef, _) {
 
+    var phoneContacts = [];
 
-    return function () {
-      var defer = $q.defer();
+    return {
+      set: function(contacts){
+        phoneContacts = contacts;
+        console.log(phoneContacts);
+        console.log('fetched phone contacts');
+      },
 
-      var registered = [];
-      var promises = [];
-      
-      if(window.cordova){
-        var opts = {                                           //search options
-          filter : '',                                 // 'Bob'
-          multiple: true,                                      // Yes, return any contact that matches criteria
-          fields:  [ 'displayName', 'name' ],                   // These are the fields to search for 'bob'.
-          desiredFields: [id, name]    //return fields.
-        };
+      get: function () {
+        var defer = $q.defer();
+        var promises = [];
 
-        $cordovaContacts.find(opts).then(function(allContacts) {
-          console.log('contacts loaded');
+        if(window.cordova){
+          console.log('in');
+          _.forEach(phoneContacts, function (contact) {
+            _.forEach(contact.phoneNumbers, function (phone) {
+                var key = phone.value.slice(1, phone.value.length);
 
-          // _.forEach(allContacts, function(contact){
-          //   var promise = FirebaseRef.child('users/'+contact.phone).once('value', function(snap) {
-          //     return snap.val();
-          //   });
-          //   promises.push(promise);
-          // });
+                if(key.length >= 10){
+                  console.log(contact.displayName, phone.value);
+                  var dfd = $q.defer();
+                  FirebaseRef.child('users/'+key+'/name').once('value',function (snap) {
+                    if(snap.val() === null){
+                      dfd.resolve(null);
+                    }
+                    else {
+                      dfd.resolve({
+                        name: contact.displayName,
+                        phone: key
+                      });
+                    }
+                  });
+                  promises.push(dfd.promise);
+                }
 
+            });
+          });
 
+          $q.all(promises)
+            .then(function (res) {
+              console.log(res);
+              var compact = _.compact(res);
+              var uniq = _.uniqBy(compact, 'phone');
+              defer.resolve(uniq);
+            });
 
-          defer.resolve(allContacts);
-        });
-        // $cordovaContacts.pickContact().then(function (contactPicked) {
-        //   defer.resolve(contactPicked);
-        // });
-        
+        }
+        else{
+          defer.resolve([{
+            name: 'Suraj Shetty',
+            phone: '917632415465'
+          }]);
+        }
+
+        return defer.promise;
       }
-      else{
-        defer.resolve([{
-          name: 'Suraj Shetty',
-          phone: '7387405603'
-        }])
-      }
+    };
 
-      return defer.promise;
-    }
-    
   });

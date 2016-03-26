@@ -7,23 +7,8 @@
  * # MainCtrl
  */
 angular.module('Bling')
-  .controller('MainCtrl', function($scope, $ionicPopover, $state) {
+  .controller('MainCtrl', function($scope, $ionicHistory, $state) {
 
-  	var template = '';
-
-  	$ionicPopover.fromTemplateUrl('templates/action-popover.html', {
-	    scope: $scope
-	}).then(function(popover) {
-		$scope.popover = popover;
-	});
-
-  	$scope.newAction = function (event) {
-  		$scope.popover.show(event);
-  	}
-
-  	$scope.action = function (state) {
-  		$scope.popover.hide();
-  		$state.go(state);
-  	}
+    $ionicHistory.clearHistory();
 
   });

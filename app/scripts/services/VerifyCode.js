@@ -14,15 +14,17 @@
 
     return function (reqid, code) {
       var defer = $q.defer();
+      var url = 'https://api.nexmo.com/verify/json?api_key=80962491&api_secret=143ce6dc221dfd7e&request_id='+reqid+'&code='+code;
+      console.log(url);
       $http({
         method: 'GET',
-        url: 'https://api.nexmo.com/verify/json?api_key=80962491&api_secret=143ce6dc221dfd7e&request_id='+reqid+'&code='+code
+        url: url
       }).then(function (response) {
         defer.resolve(response);
       }, function (response) {
         defer.reject(response);
       });
       return defer.promise;
-    }
-    
+    };
+
   });

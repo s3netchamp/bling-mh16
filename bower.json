@@ -9,7 +9,8 @@
     "angular-resource": "~1.4.8",
     "ionic": "~1.2.1",
     "ngstorage": "^0.3.10",
-    "firebase": "^2.4.1"
+    "firebase": "^2.4.1",
+    "lodash": "^4.6.1"
   },
   "resolutions": {
     "angular": "1.4.8"
