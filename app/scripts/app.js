@@ -64,7 +64,7 @@ angular.module('Bling', ['ionic', 'ngCordova', 'ngResource', 'ngStorage'])
 
 
     // redirects to default route for undefined routes
-    $urlRouterProvider.otherwise('/ask');
+    $urlRouterProvider.otherwise('/main');
   });
 
 
