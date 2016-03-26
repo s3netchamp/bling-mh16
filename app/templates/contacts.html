@@ -1,0 +1,9 @@
+<ion-view view-title="People on Bling">
+  <ion-content>
+  	<div class="list">
+      <div class="item" ng-repeat="contact in contacts" ng-click="newAction(contact.phone)">
+        {{contact.name}}
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

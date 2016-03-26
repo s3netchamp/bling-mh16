@@ -1,9 +1,25 @@
 <ion-view view-title="Ask a question">
   <ion-content>
   	<div class="list">
-  		<label class="item item-input">
-  			<input type="text" placeholder="Type a question">
+		<div class="item item-divider-android item-borderless">
+  			Your question:&nbsp;
+		</div>
+  		<label class="item item-input assertive item-borderless">
+  			<input type="text" placeholder="Type a question" ng-model="q.question" autofocus>
   		</label>
+  		<div class="item item-divider-android item-borderless">
+  			Select no. of options:
+  		</div>
+  		<div class="item range item-borderless">
+		  <input type="range" class="" ng-model="q.optionCount" max="4">
+		</div>
+  		<label class="item item-input" ng-repeat="i in getNumber(q.optionCount) track by $index">
+  			Option {{$index + 1}}&nbsp;&nbsp;<input type="text" placeholder="Option Text" ng-model="q.option">
+  		</label>
+  		<div class="row">
+  			<button class="button button-assertive center button-caps" ng-click="send(q)">Send</button>
+  		</div>
+
   	</div>
   </ion-content>
 </ion-view>

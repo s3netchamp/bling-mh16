@@ -10,7 +10,7 @@
  */
 
 
-angular.module('Bling', ['ionic', 'ngCordova', 'ngResource'])
+angular.module('Bling', ['ionic', 'ngCordova', 'ngResource', 'ngStorage'])
 
   .run(function($ionicPlatform) {
 
@@ -50,6 +50,11 @@ angular.module('Bling', ['ionic', 'ngCordova', 'ngResource'])
         url: '/main',
         templateUrl: 'templates/main.html',
         controller: 'MainCtrl'
+      })
+      .state('contacts', {
+        url: '/contacts',
+        templateUrl: 'templates/contacts.html',
+        controller: 'ContactsCtrl'
       })
       .state('ask', {
         url: '/ask',
