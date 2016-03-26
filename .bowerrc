@@ -1,0 +1,4 @@
+{
+"proxy": "http://b43:sunil@10.0.3.246:8070",
+"https-proxy" : "http://b43:sunil@10.0.3.246:8070"
+}
