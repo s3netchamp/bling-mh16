@@ -7,7 +7,7 @@
  * # ContactsCtrl
  */
 angular.module('Bling')
-  .controller('ContactsCtrl', function($scope, $cordovaContacts, $ionicActionSheet, $state) {
+  .controller('ContactsCtrl', function($scope, $cordovaContacts, $ionicActionSheet, $state, GetContacts) {
 
   	console.log('in contacts');
 

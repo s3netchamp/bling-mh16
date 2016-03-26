@@ -12,14 +12,21 @@
   .factory('GetContacts', function($cordovaContacts, $q, FirebaseRef) {
 
 
-    return function (reqid, code) {
+    return function () {
       var defer = $q.defer();
 
       var registered = [];
       var promises = [];
       
       if(window.cordova){
-        $cordovaContacts.find().then(function(allContacts) {
+        var opts = {                                           //search options
+          filter : '',                                 // 'Bob'
+          multiple: true,                                      // Yes, return any contact that matches criteria
+          fields:  [ 'displayName', 'name' ],                   // These are the fields to search for 'bob'.
+          desiredFields: [id, name]    //return fields.
+        };
+
+        $cordovaContacts.find(opts).then(function(allContacts) {
           console.log('contacts loaded');
 
           // _.forEach(allContacts, function(contact){
@@ -33,6 +40,10 @@
 
           defer.resolve(allContacts);
         });
+        // $cordovaContacts.pickContact().then(function (contactPicked) {
+        //   defer.resolve(contactPicked);
+        // });
+        
       }
       else{
         defer.resolve([{
