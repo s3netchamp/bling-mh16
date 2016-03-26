@@ -7,7 +7,7 @@
  * # ContactsCtrl
  */
 angular.module('Bling')
-  .controller('ContactsCtrl', function($scope, $cordovaContacts, $ionicActionSheet, $state, GetContacts, $ionicLoading) {
+  .controller('ContactsCtrl', function($scope, $cordovaContacts, $ionicActionSheet, $state, GetContacts, $ionicLoading, $localStorage, SendQuestion) {
 
   	console.log('in contacts');
 
@@ -19,7 +19,17 @@ angular.module('Bling')
       console.log(contacts);
     });
 
-
+    function askLocation(phone) {
+      var from = $localStorage.userData.phone,
+          to = phone,
+          q = {
+            type: location
+          };
+      // SendQuestion.single(from, to, q)
+      //   .then(function (res) {
+      //     console.log(res);
+      //   });
+    }
 
     $scope.newAction = function (phone) {
 
@@ -40,8 +50,13 @@ angular.module('Bling')
           console.log(index);
           switch (index) {
             case 0:
-              $state.go('ask');
+              $state.go('ask', {phone:phone});
               break;
+
+            case 2:
+              askLocation(phone);
+              break;
+
             default:
               console.log('invalid');
               break;
@@ -51,13 +66,10 @@ angular.module('Bling')
       });
 
 
-    }
+    };
 
-    $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
-      viewData.enableBack = true;
-    });
-
-
-
+    // $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+    //   viewData.enableBack = true;
+    // });
 
   });

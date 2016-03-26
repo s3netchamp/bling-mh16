@@ -1,5 +1,22 @@
 <ion-view view-title="Bling">
   <ion-content>
+    <div class="list">
+      <div class="item item-divider-android item-borderless">
+        Your blings
+      </div>
+      <!-- <div class="item" ng-repeat="(key, item) in items track by key">
+        {{item.question.question}}
+      </div> -->
+      <div class="card" ng-repeat="(key, item) in items track by key">
+        <div class="item item-divider">
+          {{item.question.question}}
+        </div>
+        <div class="item item-text-wrap">
+          Answer: {{(item.answered)?item.answer.text:'Not answered yet'}}
+        </div>
+      </div>
+    </div>
+
     <button class="button button-assertive" ui-sref="contacts">New Bling</button>
     <button class="button button-assertive" ui-sref="poll">Create Poll</button>
     <button class="button button-assertive" ui-sref="pollParticipation">Participate Poll</button>

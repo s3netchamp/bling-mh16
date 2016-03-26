@@ -1,20 +1,21 @@
 <ion-view view-title="Ask a question">
   <ion-content>
   	<div class="list">
-		<div class="item item-divider-android item-borderless">
+		<div class="item item-divider-android item-borderless positive">
   			Your question:&nbsp;
 		</div>
   		<label class="item item-input assertive item-borderless">
   			<input type="text" placeholder="Type a question" ng-model="q.question" autofocus>
   		</label>
-  		<div class="item item-divider-android item-borderless">
-  			Select no. of options:
+  		<div class="item item-divider-android item-borderless item-button-right positive">
+  			Add and edit options:
+        <div class="buttons option-buttons">
+          <button class="button button-clear" ng-click="addOption()" ng-disabled="options.length > 3"><i class="icon ion-android-add"></i></button>
+          <button class="button button-clear" ng-click="removeOption()" ng-disabled="options.length <= 1"><i class="icon ion-android-remove"></i></button>
+        </div>
   		</div>
-  		<div class="item range item-borderless">
-		  <input type="range" class="" ng-model="q.optionCount" max="4">
-		</div>
-  		<label class="item item-input" ng-repeat="i in getNumber(q.optionCount) track by $index">
-  			Option {{$index + 1}}&nbsp;&nbsp;<input type="text" placeholder="Option Text" ng-model="q.option">
+  		<label class="item item-input item-borderless" ng-repeat="option in options track by $index">
+  			Option {{$index + 1}}&nbsp;&nbsp;<input type="text" placeholder="Option Text" ng-model="option.text">
   		</label>
   		<div class="row">
   			<button class="button button-assertive center button-caps" ng-click="send(q)">Send</button>

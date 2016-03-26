@@ -20,10 +20,18 @@ angular.module('Bling')
       Account.create(phone, name).then(function(res){
         console.log(res);
         $localStorage.active = true;
+        $localStorage.userData = {
+          phone: phone,
+          name: name
+        };
         $state.go('main');
       }, function(err){
         console.log(err);
         $localStorage.active = true;
+        $localStorage.userData = {
+          phone: phone,
+          name: name
+        };
         $state.go('main');
       });
     }

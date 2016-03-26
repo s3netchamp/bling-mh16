@@ -12,33 +12,72 @@
 
 angular.module('Bling', ['ionic', 'ngCordova', 'ngResource', 'ngStorage'])
 
-  .run(function($ionicPlatform, $cordovaContacts, GetContacts) {
+  .run(function($ionicPlatform, $cordovaContacts, GetContacts, $ionicLoading, $localStorage, FirebaseRef, SendQuestion, $rootScope, $ionicPopup) {
 
     $ionicPlatform.ready(function() {
       // save to use plugins here
 
-      //OneSignal Setup
-      var notificationOpenedCallback = function(jsonData) {
-        console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
-      };
+      if(window.cordova){
+        //OneSignal Setup
+        var notificationOpenedCallback = function(response) {
+          // console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+          // SendQuestion.recieved(jsonData);
+          console.log(response);
+          $rootScope.options = response.additionalData.buttons;
+          var myPopup = $ionicPopup.show({
+            template: '<button class="button button-full button-positive" ng-repeat="opt in options" ng-click="optionClicked(opt)">{{opt.text}}</button>',
+            title: response.message,
+            scope: $rootScope,
+            buttons: []
+          });
 
-      window.plugins.OneSignal.init("ac7e4f3e-570f-4bf3-8d9a-4e9f9b3385f8",
-                                   {googleProjectNumber: "313179834389"},
-                                   notificationOpenedCallback);
+          myPopup.then(function(res) {
+            console.log('Tapped!', res);
+          });
+          $rootScope.optionClicked = function (opt) {
+            console.log('clicked', opt);
+            SendQuestion.answer(response.additionalData.chatKey, response.additionalData.questionKey, opt)
+              .then(function (res) {
+                console.log('answered question ', res);
+                myPopup.close();
+              });
+          };
+        };
 
-      // Show an alert box if a notification comes in when the user is in your app.
-      window.plugins.OneSignal.enableInAppAlertNotification(true);
+        window.plugins.OneSignal.init("ac7e4f3e-570f-4bf3-8d9a-4e9f9b3385f8",
+        {googleProjectNumber: "313179834389"},
+        notificationOpenedCallback);
 
-      //Contacts
-      var opts = {
-        filter : '',
-        multiple: true,
-        fields:  [ 'displayName', 'name' ]
-      };
-      opts.hasPhoneNumber = true;         //hasPhoneNumber only works for android
-      $cordovaContacts.find(opts).then(function (contactsFound) {
-        GetContacts.set(contactsFound);
-      });
+        // Show an alert box if a notification comes in when the user is in your app.
+        window.plugins.OneSignal.enableInAppAlertNotification(false);
+
+        if($localStorage.userData){
+          console.log('onesignal ids');
+          window.plugins.OneSignal.getIds(function(ids) {
+            console.log('getIds: ' + JSON.stringify(ids));
+            FirebaseRef.child('users/'+$localStorage.userData.phone).update({
+              appId: ids.userId
+            });
+          });
+        }
+
+        //Contacts
+        var opts = {
+          filter : '',
+          multiple: true,
+          fields:  [ 'displayName', 'name' ]
+        };
+        opts.hasPhoneNumber = true;         //hasPhoneNumber only works for android
+        $ionicLoading.show({
+          template: 'Getting contact list..'
+        });
+        $cordovaContacts.find(opts).then(function (contactsFound) {
+          GetContacts.set(contactsFound);
+          $ionicLoading.hide();
+        });
+
+      }
+
 
     });
 
@@ -70,7 +109,10 @@ angular.module('Bling', ['ionic', 'ngCordova', 'ngResource', 'ngStorage'])
       .state('ask', {
         url: '/ask',
         templateUrl: 'templates/ask.html',
-        controller: 'AskCtrl'
+        controller: 'AskCtrl',
+        params: {
+          phone: null
+        }
       })
       .state('poll', {
         url: '/poll',

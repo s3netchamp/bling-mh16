@@ -9,7 +9,7 @@
  */
  angular.module('Bling')
   // use factory for services
-  .factory('Account', function(FirebaseRef, $q) {
+  .factory('Account', function(FirebaseRef, $q, $ionicPlatform, $localStorage) {
 
     var newUser = function (phone) {
         return FirebaseRef.child('users/'+phone+'/name').once('value');

@@ -49,7 +49,14 @@
     "gulp": "./node_modules/.bin/gulp"
   },
   "cordovaPlugins": [
-    "cordova-plugin-contacts"
+    "cordova-plugin-contacts",
+    "cordova-plugin-splashscreen",
+    "cordova-plugin-statusbar",
+    "cordova-plugin-whitelist",
+    "onesignal-cordova-plugin",
+    "ionic-plugin-keyboard"
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [
+    "android"
+  ]
 }

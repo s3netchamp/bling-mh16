@@ -29,6 +29,7 @@
           _.forEach(phoneContacts, function (contact) {
             _.forEach(contact.phoneNumbers, function (phone) {
                 var key = phone.value.slice(1, phone.value.length);
+                key = key.replace(/\s+/g, '');
 
                 if(key.length >= 10){
                   console.log(contact.displayName, phone.value);
