@@ -28,36 +28,15 @@ angular.module('Bling', ['ionic', 'ngCordova', 'ngResource'])
 
     // Application routing
     $stateProvider
-      .state('app', {
-        url: '/app',
-        abstract: true,
+      .state('main', {
+        url: '/main',
         templateUrl: 'templates/main.html',
         controller: 'MainController'
-      })
-      .state('app.home', {
-        url: '/home',
-        cache: true,
-        views: {
-          'viewContent': {
-            templateUrl: 'templates/views/home.html',
-            controller: 'HomeController'
-          }
-        }
-      })
-      .state('app.settings', {
-        url: '/settings',
-        cache: true,
-        views: {
-          'viewContent': {
-            templateUrl: 'templates/views/settings.html',
-            controller: 'SettingsController'
-          }
-        }
       });
 
 
     // redirects to default route for undefined routes
-    $urlRouterProvider.otherwise('/app/home');
+    $urlRouterProvider.otherwise('/main');
   });
 
 
