@@ -28,15 +28,25 @@ angular.module('Bling', ['ionic', 'ngCordova', 'ngResource'])
 
     // Application routing
     $stateProvider
+      .state('register', {
+        url: '/register',
+        templateUrl: 'templates/register-phone.html',
+        controller: 'RegisterCtrl'
+      })
       .state('main', {
         url: '/main',
         templateUrl: 'templates/main.html',
-        controller: 'MainController'
+        controller: 'MainCtrl'
+      })
+      .state('ask', {
+        url: '/ask',
+        templateUrl: 'templates/ask.html',
+        controller: 'AskCtrl'
       });
 
 
     // redirects to default route for undefined routes
-    $urlRouterProvider.otherwise('/main');
+    $urlRouterProvider.otherwise('/register');
   });
 
 
