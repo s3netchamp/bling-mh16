@@ -173,7 +173,7 @@ angular.module('Bling', ['ionic', 'ngCordova', 'ngResource', 'ngStorage'])
         controller: 'PollParticipationCtrl'
       })
       .state('pollStatus', {
-        url: '/pollStatus',
+        url: '/pollStatus?id',
         templateUrl: 'templates/poll-status.html',
         controller: 'PollStatusCtrl'
       });

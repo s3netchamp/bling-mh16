@@ -7,25 +7,37 @@
  * # PollCtrl
  */
 angular.module('Bling')
-  .controller('PollCtrl', function($rootScope,$scope, $ionicPopover, $state, SendVerification, VerifyCode ) {
-    $rootScope.option={};
-    console.log('PollCtrl');
-   	$rootScope.q = {
-  		optionCount:0
-  	};
+  .controller('PollCtrl', function($scope , $localStorage, SendQuestion,$state) {
+    
+  	$scope.q = {};
 
-  	$scope.getNumber = function(num) {
-  		num = parseInt(num);
-  		return new Array(num);
-  	}
+    $scope.options = [{
+      id: 0,
+      text: ''
+    }];
+
+    $scope.addOption = function () {
+      $scope.options.push({
+        id: $scope.options.length
+      });
+    };
+    
+    $scope.removeOption = function () {
+      $scope.options.pop();
+    };
+
 
   	$scope.send = function (q) {
-  		
-  	}
-      $scope.print = function (modelname) {
-  		console.log($scope.option[modelname]);
-          console.log($rootScope.q.optionCount);
-
-  	}
-
+      q.options = $scope.options;
+      console.log(q);
+      var from = $localStorage.userData.phone;
+      q.pollId = +new Date;
+      console.log(+new Date);
+      SendQuestion.createPoll(from, q).then(function(res){
+        console.log(res);
+      }).then(function(res){
+          $state.go("pollStatus" , {"id" : q.pollId});
+      });
+  	};
+      
   });

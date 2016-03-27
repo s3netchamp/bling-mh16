@@ -6,10 +6,20 @@
   			Enter Poll ID :&nbsp;
 		</div>
   		<label class="item item-input assertive item-borderless">
-  			<input type="text" placeholder="Type a question" ng-model="q.question" autofocus>
+  			<input type="text" placeholder="Type a question" ng-model="poll.id" autofocus required>
   		</label>
-  		<div class="item item-divider-android item-borderless">
-  			Poll Question
+          <label class="item item-input assertive item-borderless">
+         <button class="button button-clear" ng-click="verify()" ng-disabled="id.length > 10">Get Poll</button>
+         </label>
+  		<div class="item item-divider-android item-borderless" ng-show="verified">
+  			Poll Subject {{poll.subject}}
+  		</div>
+        <div class="item item-divider-android item-borderless" ng-if="verified">
+  			Options
+              <div class="list">
+                   <div class="item item-divider-android item-borderless" ng-repeat="option in options" ng-click="setPoll(option.id)">
+                       {{option.text}}
+              </div>    
   		</div>
   		<!--<div class="item range item-borderless">
 		  <input type="range" class="" ng-model="q.optionCount" max="4">

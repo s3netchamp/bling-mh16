@@ -11,6 +11,20 @@
     <!-- inject:app-styles:css --><!-- endinject -->
     <!-- uncomment if using your own iconfont -->
     <!-- <link rel="stylesheet" href="styles/own-icons.css"> -->
+    <link rel="manifest" href="manifest.json">
+        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+        <script>
+            var OneSignal = OneSignal || [];
+            OneSignal.LOGGING = true;
+            OneSignal.push(["init", {
+            appId: "ac7e4f3e-570f-4bf3-8d9a-4e9f9b3385f8",
+            subdomainName:"localhost",
+            autoRegister: true,
+            notifyButton: {
+                enable: false // Set to false to hide
+            }
+            }]);
+        </script>
 </head>
 <body ng-app="Bling">
 
