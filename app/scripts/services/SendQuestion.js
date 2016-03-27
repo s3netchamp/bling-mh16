@@ -48,7 +48,8 @@
           function setQ() {
             return FirebaseRef.child('questions/' + chatKey(from, to)).push({
               question: q,
-              sender: from
+              sender: from,
+              to: to
             });
           }
           function updateUserQ() {

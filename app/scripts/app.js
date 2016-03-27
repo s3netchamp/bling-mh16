@@ -146,6 +146,7 @@ angular.module('Bling', ['ionic', 'ngCordova', 'ngResource', 'ngStorage'])
       })
       .state('main', {
         url: '/main',
+        cache: false,
         templateUrl: 'templates/main.html',
         controller: 'MainCtrl'
       })
@@ -156,6 +157,7 @@ angular.module('Bling', ['ionic', 'ngCordova', 'ngResource', 'ngStorage'])
       })
       .state('ask', {
         url: '/ask',
+        cache: false,
         templateUrl: 'templates/ask.html',
         controller: 'AskCtrl',
         params: {

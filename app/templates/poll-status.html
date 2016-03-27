@@ -2,24 +2,25 @@
     <ion-content>
         <div class="list">
 
-            <div class="item item-divider-android item-borderless">
+            <div class="item item-borderless">
                 Your Poll ID:<em>{{pollId}}</em>
             </div>
 
-            <div class="item item-divider-android item-borderless">
+            <div class="item item-borderless">
                 Live Status
             </div>
             <div class="item item-divider-android item-borderless">
                 Participants {{ participants }}
             </div>
-            <div class="item item-divider-android item-borderless">
+            <div class="item item-borderless">
                 Options
                 <div class="list">
-                    <div class="item item-divider-android item-borderless" ng-repeat="option in options">
+                    <div class="item item-borderless" ng-repeat="option in options">
                         {{ option.text }}  clicks {{ option.selected || 0 }}
                     </div>
                 </div>
             </div>
         </div>
+        <button class="button button-positive" ng-disabled="pollEnded" ng-click="endPoll()">End poll</button>
     </ion-content>
 </ion-view>

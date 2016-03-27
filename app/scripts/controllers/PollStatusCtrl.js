@@ -7,7 +7,7 @@
  * # PollStatusCtrl
  */
 angular.module('Bling')
-    .controller('PollStatusCtrl', function($scope, $stateParams, FirebaseRef) {
+    .controller('PollStatusCtrl', function($scope, $stateParams, FirebaseRef, $state) {
         $scope.participantsData = {};
         $scope.participants = 0;
         $scope.options = {};
@@ -28,4 +28,18 @@ angular.module('Bling')
             console.log(Object.keys($scope.participantsData).length, $scope.participantsData);
             $scope.$apply();
         });
+        $scope.pollEnded = false;
+        $scope.endPoll = function() {
+
+            var opts = JSON.parse(angular.toJson($scope.options));
+            console.log(opts);
+            FirebaseRef.child('polls/'+$scope.pollId).update({
+                pollEnded: true,
+                options: opts
+            }, function(err){
+                console.log(err);
+                $scope.pollEnded = true;
+                $state.go('main');
+            });
+        };
     });

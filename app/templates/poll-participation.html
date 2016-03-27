@@ -2,11 +2,11 @@
   <ion-content>
   	<div class="list">
           
-		<div class="item item-divider-android item-borderless">
+		<div class="item item-borderless">
   			Enter Poll ID :&nbsp;
 		</div>
   		<label class="item item-input assertive item-borderless">
-  			<input type="text" placeholder="Type a question" ng-model="poll.id" autofocus required>
+  			<input type="text" placeholder="Enter Poll ID" ng-model="poll.id" autofocus required>
   		</label>
           <label class="item item-input assertive item-borderless">
          <button class="button button-clear" ng-click="verify()" ng-disabled="id.length > 10">Get Poll</button>
@@ -14,10 +14,10 @@
   		<div class="item item-divider-android item-borderless" ng-show="verified">
   			Poll Subject {{poll.subject}}
   		</div>
-        <div class="item item-divider-android item-borderless" ng-if="verified">
+        <div class="item item-borderless" ng-if="verified">
   			Options
               <div class="list">
-                   <div class="item item-divider-android item-borderless" ng-repeat="option in options" ng-click="setPoll(option.id)">
+                   <div class="item item-borderless" ng-repeat="option in options" ng-click="setPoll(option.id)">
                        {{option.text}}
               </div>    
   		</div>

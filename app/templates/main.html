@@ -1,19 +1,29 @@
 <ion-view view-title="Bling">
   <ion-content>
+    <div class="button-bar">
+      <button class="button button-assertive" ui-sref="contacts">New Bling</button>
+      <button class="button button-assertive" ui-sref="poll">Create Poll</button>
+      <button class="button button-assertive" ui-sref="pollParticipation">Participate Poll</button>
+    </div>
     <div class="list">
-      <div class="item item-divider-android item-borderless">
+      <div class="item item-borderless">
         Your blings
       </div>
       <!-- <div class="item" ng-repeat="(key, item) in items track by key">
         {{item.question.question}}
       </div> -->
-      <div class="card" ng-repeat="(key, item) in items track by key">
+      <!-- <div class="card" ng-repeat="(key, item) in items track by key">
         <div class="item item-divider">
           {{item.question.question}}
         </div>
         <div class="item item-text-wrap">
           Answer: {{(item.answered)?item.answer.text:'Not answered yet'}}
         </div>
+      </div> -->
+      <div class="item item-avatar-left" ng-repeat="(key, item) in items track by key">
+        <img ng-src="{{'https://api.adorable.io/avatars/80/'+item.question.question+'.png'}}" alt="">
+        <h2>{{'person'}}</h2>
+        <p>Q: {{item.question.question}} A: {{(item.answered)?item.answer.text:'Not answered yet'}}</p>
       </div>
       <div class="item item-borderless">
         Location Requests
@@ -22,15 +32,12 @@
         <div class="item item-divider">
           {{item.to}}
         </div>
+        <div class="item item-body">
+          <img class="full-image" src="http://s18.postimg.org/u8ebhourt/Capture.png">
+            
+        </div>
       </div>
     </div>
-
-
   </ion-content>
-  <div class="bar bar-footer">
-      
-    <button class="button button-assertive" ui-sref="contacts">New Bling</button>
-    <button class="button button-assertive" ui-sref="poll">Create Poll</button>
-    <button class="button button-assertive" ui-sref="pollParticipation">Participate Poll</button>
-  </div>
+  
 </ion-view>

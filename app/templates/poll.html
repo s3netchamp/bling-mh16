@@ -2,13 +2,13 @@
   <ion-content>
   	<div class="list">
           
-        <div class="item item-divider-android item-borderless positive">
+        <div class="item item-borderless positive">
   			Poll Subject:&nbsp;
 		</div>
   		<label class="item item-input assertive item-borderless">
-  			<input type="text" placeholder="Type a question" ng-model="q.pollSubject" autofocus requires>
+  			<input type="text" placeholder="Poll Subject" ng-model="q.pollSubject" autofocus requires>
   		</label>
-  		<div class="item item-divider-android item-borderless item-button-right positive">
+  		<div class="item item-borderless item-button-right positive">
   			Add and edit options:
         <div class="buttons option-buttons">
           <button class="button button-clear" ng-click="addOption()" ng-disabled="options.length > 3"><i class="icon ion-android-add"></i></button>

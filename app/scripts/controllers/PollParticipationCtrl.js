@@ -7,7 +7,7 @@
  * # PollParticipationCtrl
  */
 angular.module('Bling')
-  .controller('PollParticipationCtrl', function($scope , FirebaseRef , $localStorage) {
+  .controller('PollParticipationCtrl', function($scope , FirebaseRef , $localStorage, $ionicPopup) {
     
     $scope.verified = false;
     $scope.options = {};
@@ -24,6 +24,26 @@ angular.module('Bling')
                 $scope.options = snapshot.val().options;
                 $scope.poll.subject = snapshot.val().pollSubject;
                 $scope.$apply();
+
+                FirebaseRef.child('polls/'+$scope.poll.id+'/pollEnded').on('value', function (snap) {
+                    console.log(snap.val());
+                    if(snap.val()){
+
+                        FirebaseRef.child('polls/'+$scope.poll.id+'/options').once('value', function (data) {
+                            
+                            $scope.results = data.val();
+                             var myPopup = $ionicPopup.show({
+                                template: '<div class="list"><div class="item" ng-repeat="op in results">{{op.text}}<span class="item-note">{{op.selected}}</span></div></div>',
+                                title: 'Poll Results',
+                                subTitle: $scope.poll.subject,
+                                scope: $scope,
+                                buttons: [
+                                  { text: 'OK' }
+                                ]
+                              });
+                        });
+                    }
+                });
             }
             else {
                 alert("invalid id");
@@ -34,6 +54,7 @@ angular.module('Bling')
          FirebaseRef.child("polls/"+$scope.poll.id+"/participants/"+$localStorage.userData.phone).set(optionid);
         console.log("Set") ;
     }
+
     
 
   });

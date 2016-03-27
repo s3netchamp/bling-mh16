@@ -25,6 +25,7 @@ angular.module('Bling')
       SendQuestion.askLocation(from, to)
         .then(function (res) {
           console.log(res);
+          $state.go('main');
         });
     }
 
@@ -34,9 +35,7 @@ angular.module('Bling')
       var hideSheet = $ionicActionSheet.show({
        buttons: [
          { text: '<i class="icon ion-share"></i> Ask a question' },
-         { text: '<i class="icon ion-stats-bars"></i> Vote or Poll' },
-         { text: '<i class="icon ion-android-pin"></i> Ask for location' },
-         { text: '<i class="icon ion-share"></i> Some other function'}
+         { text: '<i class="icon ion-android-pin"></i> Ask for location' }
        ],
        titleText: 'Select an action',
        cancelText: 'Cancel',
@@ -50,7 +49,7 @@ angular.module('Bling')
               $state.go('ask', {phone:phone});
               break;
 
-            case 2:
+            case 1:
               askLocation(phone);
               break;
 

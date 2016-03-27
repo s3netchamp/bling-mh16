@@ -9,7 +9,7 @@
 angular.module('Bling')
   .controller('MainCtrl', function($scope, $ionicHistory, FirebaseRef, _, $localStorage) {
 
-    $ionicHistory.clearHistory();
+    // $ionicHistory.clearHistory();
 
     $scope.items = {};
     $scope.locReqs = {};
@@ -38,6 +38,11 @@ angular.module('Bling')
     FirebaseRef.child('locationRequests').orderByChild('from').equalTo($localStorage.userData.phone).on('child_added', function(snap){
       $scope.locReqs[snap.key()] = snap.val();
       $scope.$apply('locReqs');
+    });
+
+    $ionicHistory.nextViewOptions({
+      disableAnimate: true,
+      disableBack: true
     });
 
   });

@@ -7,7 +7,7 @@
  * # AskCtrl
  */
 angular.module('Bling')
-  .controller('AskCtrl', function($scope, $stateParams, SendQuestion, $localStorage) {
+  .controller('AskCtrl', function($scope, $stateParams, SendQuestion, $localStorage, $state) {
 
   	console.log('askctrl');
     console.log($stateParams);
@@ -47,6 +47,7 @@ angular.module('Bling')
       var to = $stateParams.phone;
       SendQuestion.single(from, to, q).then(function(res){
         console.log(res);
+        $state.go('main');
       });
   	};
 
