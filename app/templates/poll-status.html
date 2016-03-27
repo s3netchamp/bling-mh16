@@ -1,16 +1,25 @@
 <ion-view view-title="Your Poll Question">
-  <ion-content>
-  	<div class="list">
-          
-		<div class="item item-divider-android item-borderless">
-  			Your Poll ID:<em>ABC123</em>
-		</div>
-  		
-  		<div class="item item-divider-android item-borderless">
-  			Live Status
-  		</div>
-  		
+    <ion-content>
+        <div class="list">
 
-  	</div>
-  </ion-content>
+            <div class="item item-divider-android item-borderless">
+                Your Poll ID:<em>{{pollId}}</em>
+            </div>
+
+            <div class="item item-divider-android item-borderless">
+                Live Status
+            </div>
+            <div class="item item-divider-android item-borderless">
+                Participants {{ participants }}
+            </div>
+            <div class="item item-divider-android item-borderless">
+                Options
+                <div class="list">
+                    <div class="item item-divider-android item-borderless" ng-repeat="option in options">
+                        {{ option.text }}  clicks {{ option.selected || 0 }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>
