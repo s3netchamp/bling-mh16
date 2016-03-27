@@ -12,7 +12,7 @@
 
 angular.module('Bling', ['ionic', 'ngCordova', 'ngResource', 'ngStorage'])
 
-  .run(function($ionicPlatform, $cordovaContacts, GetContacts, $ionicLoading, $localStorage, FirebaseRef, SendQuestion, $rootScope, $ionicPopup) {
+  .run(function($ionicPlatform, $cordovaContacts, GetContacts, $ionicLoading, $localStorage, FirebaseRef, SendQuestion, $rootScope, $ionicPopup, $cordovaGeolocation) {
 
     $ionicPlatform.ready(function() {
       // save to use plugins here
@@ -23,25 +23,52 @@ angular.module('Bling', ['ionic', 'ngCordova', 'ngResource', 'ngStorage'])
           // console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
           // SendQuestion.recieved(jsonData);
           console.log(response);
-          $rootScope.options = response.additionalData.buttons;
-          var myPopup = $ionicPopup.show({
-            template: '<button class="button button-full button-positive" ng-repeat="opt in options" ng-click="optionClicked(opt)">{{opt.text}}</button>',
-            title: response.message,
-            scope: $rootScope,
-            buttons: []
-          });
 
-          myPopup.then(function(res) {
-            console.log('Tapped!', res);
-          });
-          $rootScope.optionClicked = function (opt) {
-            console.log('clicked', opt);
-            SendQuestion.answer(response.additionalData.chatKey, response.additionalData.questionKey, opt)
-              .then(function (res) {
-                console.log('answered question ', res);
+          if(response.additionalData.type == 'locationRequest'){
+            var myPopup = $ionicPopup.show({
+              template: '<button class="button button-full button-positive" ng-click="sendLocation()">Send</button>',
+              title: response.message,
+              scope: $rootScope,
+              buttons: []
+            });
+            $rootScope.sendLocation = function () {
+              console.log('sendLocation');
+              FirebaseRef.child('locationRequests/'+response.additionalData.key).update({
+                location: {
+                  lat: '19.081637',
+                  lon: '72.889138'
+                },
+                serviced: true
+              }, function (err) {
+                if(!err)
+                  console.log('location sent');
+                else
+                  console.log(err);
                 myPopup.close();
               });
-          };
+            };
+          }
+          else{
+            $rootScope.options = response.additionalData.buttons;
+            var myPopup = $ionicPopup.show({
+              template: '<button class="button button-full button-positive" ng-repeat="opt in options" ng-click="optionClicked(opt)">{{opt.text}}</button>',
+              title: response.message,
+              scope: $rootScope,
+              buttons: []
+            });
+
+            myPopup.then(function(res) {
+              console.log('Tapped!', res);
+            });
+            $rootScope.optionClicked = function (opt) {
+              console.log('clicked', opt);
+              SendQuestion.answer(response.additionalData.chatKey, response.additionalData.questionKey, opt)
+                .then(function (res) {
+                  console.log('answered question ', res);
+                  myPopup.close();
+                });
+            };
+          }
         };
 
         window.plugins.OneSignal.init("ac7e4f3e-570f-4bf3-8d9a-4e9f9b3385f8",
@@ -76,6 +103,27 @@ angular.module('Bling', ['ionic', 'ngCordova', 'ngResource', 'ngStorage'])
           $ionicLoading.hide();
         });
 
+        // console.log($cordovaGeolocation);
+        // var posOptions = {timeout: 10000, enableHighAccuracy: false};
+        // $cordovaGeolocation
+        //   .getCurrentPosition(posOptions)
+        //   .then(function (position) {
+        //     // return FirebaseRef.child('locationRequests/'+response.additionalData.key).update({
+        //     //   location: position.coords
+        //     // });
+        //     $localStorage.userData.location = position;
+        //   })
+        //   .then(function (err) {
+        //     if(!err){
+        //       console.log('location saved');
+        //     }
+        //     else
+        //       console.log(err);
+        //   });
+        $localStorage.userData.location = {
+          lat: '19.081637',
+          lon: '72.889138'
+        }
       }
 
 

@@ -15,10 +15,22 @@
           Answer: {{(item.answered)?item.answer.text:'Not answered yet'}}
         </div>
       </div>
+      <div class="item item-borderless">
+        Location Requests
+      </div>
+      <div class="card" ng-repeat="(key, item) in locReqs track by key">
+        <div class="item item-divider">
+          {{item.to}}
+        </div>
+      </div>
     </div>
 
+
+  </ion-content>
+  <div class="bar bar-footer">
+      
     <button class="button button-assertive" ui-sref="contacts">New Bling</button>
     <button class="button button-assertive" ui-sref="poll">Create Poll</button>
     <button class="button button-assertive" ui-sref="pollParticipation">Participate Poll</button>
-  </ion-content>
+  </div>
 </ion-view>

@@ -21,14 +21,11 @@ angular.module('Bling')
 
     function askLocation(phone) {
       var from = $localStorage.userData.phone,
-          to = phone,
-          q = {
-            type: location
-          };
-      // SendQuestion.single(from, to, q)
-      //   .then(function (res) {
-      //     console.log(res);
-      //   });
+          to = phone;
+      SendQuestion.askLocation(from, to)
+        .then(function (res) {
+          console.log(res);
+        });
     }
 
     $scope.newAction = function (phone) {

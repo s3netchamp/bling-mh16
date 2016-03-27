@@ -12,6 +12,7 @@ angular.module('Bling')
     $ionicHistory.clearHistory();
 
     $scope.items = {};
+    $scope.locReqs = {};
 
     function addQuestion(snap) {
       console.log('child_added');
@@ -32,6 +33,11 @@ angular.module('Bling')
         FirebaseRef.child('questions/'+key).orderByChild('sender').equalTo($localStorage.userData.phone).on('child_added', addQuestion);
         FirebaseRef.child('questions/'+key).orderByChild('sender').equalTo($localStorage.userData.phone).on('child_changed', updateQuestion);
       });
+    });
+
+    FirebaseRef.child('locationRequests').orderByChild('from').equalTo($localStorage.userData.phone).on('child_added', function(snap){
+      $scope.locReqs[snap.key()] = snap.val();
+      $scope.$apply('locReqs');
     });
 
   });
