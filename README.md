@@ -1,31 +1,31 @@
 #Bling
-RealTime app for Questioning / Polling / Caring (by getting location of your dear ones) 
+Simple RealTime app for asking questions / taking polls / requesting location
 
 ###Features
-* Instant Q and A session
-* Polling Feature
+* Q and A session
+* Poll/Voting Feature
 * Ask for location of your friends or family members
-* Push Notifications about questions if app is not active  
+* Instant Push Notifications  
 
-###Technologies and platforms Used
-* `Ionicframework` for building crossplatform frontend
-* `Firebase` for realtime nosql database
-* `Onesignal` for push Notification
+###Technologies and platforms used
+* `Ionicframework` for frontend
+* `Cordova` for cross platform
+* `Firebase` for realtime database
+* `Onesignal` for push notifications
 * `Heroku` for hosting NodeJS worker
 
-###ScreenShots of our app
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+###Screenshots
+![Screenshot 1](https://i.imgsafe.org/d46ea97.jpg)
+![Screenshot 2](https://i.imgsafe.org/d205846.jpg)
+![Screenshot 3](https://i.imgsafe.org/cf59cdc.jpg)
 
-###How to setup our project on your pc
-1. Clone our github project 
-2. Install nodejs from this website
-3. Now install gulp and bower by typing `npm install -g gulp bower` in command prompt 
-4. Now go to project folder where u cloned/extracted our project and open cmd on that folder 
-5. On cmd type `npm install && bower install`
-6. Now type `gulp` on cmd to serve our project on browser
+###Setup project on your machine
+1. Clone our github project
+2. Install NodeJS
+3. Install gulp and bower using npm `npm install -g gulp bower`
+4. Install ionic and cordova `npm install -g cordova ionic`
+5. cd into the project folder and run `npm install && bower install`
+6. Now run command `gulp` to serve project on browser
 
-###apk
-link
-
-### web Demo
+### Working Demo
 http://bling.byethost6.com
