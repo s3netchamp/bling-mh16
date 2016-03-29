@@ -7,6 +7,11 @@ Simple RealTime app for asking questions / taking polls / requesting location
 * Ask for location of your friends or family members
 * Instant Push Notifications  
 
+Note: Q&A session and Push Notifications currently works only on mobile devices download APK from given link for testing.
+
+### APK link
+https://www.dropbox.com/s/4lvdbu0h1ha223c/Bling.apk?dl=0
+
 ###Technologies and platforms used
 * `Ionicframework` for frontend
 * `Cordova` for cross platform
