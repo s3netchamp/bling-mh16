@@ -25,13 +25,16 @@ https://github.com/s3netchamp/bling-mh16/raw/master/Bling.apk
 ![Screenshot 3](https://i.imgsafe.org/cf59cdc.jpg)
 
 ###Setup project on your machine
-1. Clone the repo 
-2. Install NodeJS
-3. Do `npm install -g gulp bower`
-4. Do `npm install -g cordova ionic`
-5. `cd` into the project folder
-6. Do `npm install && bower install`
-7. Do `gulp` to serve the project on local server
+1. Install NodeJS
+2. Run the following commands:
+```shell
+npm install -g gulp bower
+npm install -g cordova ionic
+git clone https://github.com/s3netchamp/bling-mh16
+cd bling-mh16
+npm install && bower install
+gulp
+```
 
 ### Demo
 http://bling.byethost6.com
