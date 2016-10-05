@@ -38,5 +38,3 @@ gulp
 
 ### Demo
 http://bling.byethost6.com
-### Working Demo
-http://bling.byethost6.com
